@@ -59,7 +59,7 @@ export default function AiEngineLab() {
   return (
     <div className="ai-engine-lab">
       <div className="glass-card" style={{ marginBottom: '2rem' }}>
-        <span style={{ fontSize: '0.8rem', color: 'var(--cyan)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <span style={{ fontSize: '0.8rem', color: 'var(--accent)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Centralized Shared Infrastructure
         </span>
         <h1 style={{ fontSize: '2.25rem', marginTop: '0.25rem' }}>Shared AI & Data Engine Lab</h1>
@@ -83,7 +83,7 @@ export default function AiEngineLab() {
                 <span style={{ fontSize: '1.25rem' }}>{s.icon}</span>
                 <div>
                   <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>{s.name}</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{s.tag}</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{s.tag}</div>
                 </div>
               </button>
             ))}

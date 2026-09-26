@@ -34,7 +34,7 @@ export default function RoadmapView({ onOpenProject }) {
       <div className="glass-card" style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <span style={{ fontSize: '0.8rem', color: 'var(--cyan)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Sequential Progression Architecture
             </span>
             <h1 style={{ fontSize: '2.25rem', marginTop: '0.25rem' }}>AI58 Master Roadmap & Checklists</h1>
@@ -43,14 +43,14 @@ export default function RoadmapView({ onOpenProject }) {
             </p>
           </div>
 
-          <div style={{ textAlign: 'right', background: 'rgba(255, 255, 255, 0.03)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontWeight: '700', textTransform: 'uppercase' }}>
+          <div style={{ textAlign: 'right', background: 'var(--bg-surface)', padding: '1rem 1.5rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase' }}>
               Overall Readiness
             </div>
-            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#34d399', fontFamily: 'var(--font-heading)' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--tier-beginner)', fontFamily: 'var(--font-heading)' }}>
               {roadmapData?.overall_completion_percentage || 100}%
             </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
               {roadmapData?.completed_checklist_items} / {roadmapData?.total_checklist_items} checkpoints
             </div>
           </div>
@@ -60,13 +60,17 @@ export default function RoadmapView({ onOpenProject }) {
       {/* 3 Tier Levels */}
       {roadmapData?.levels?.map((lvl) => {
         const borderAccent =
-          lvl.tier === 'BEGINNER' ? '#34d399' : lvl.tier === 'INTERMEDIATE' ? '#38bdf8' : '#c084fc';
+          lvl.tier === 'BEGINNER'
+            ? 'var(--tier-beginner)'
+            : lvl.tier === 'INTERMEDIATE'
+            ? 'var(--tier-intermediate)'
+            : 'var(--tier-advanced)';
 
         return (
           <div key={lvl.level} className="glass-card" style={{ marginBottom: '2rem', borderLeft: `4px solid ${borderAccent}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
               <div>
-                <h2 style={{ fontSize: '1.4rem', color: '#fff' }}>{lvl.title}</h2>
+                <h2 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>{lvl.title}</h2>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lvl.description}</p>
               </div>
               <span className="tech-tag" style={{ fontSize: '0.8rem', padding: '0.3rem 0.75rem' }}>
@@ -80,8 +84,8 @@ export default function RoadmapView({ onOpenProject }) {
                 <div
                   key={p.id}
                   style={{
-                    background: 'rgba(7, 9, 14, 0.6)',
-                    border: '1px solid var(--border-subtle)',
+                    background: 'var(--bg-surface)',
+                    border: '1px solid var(--border)',
                     borderRadius: '10px',
                     padding: '1rem',
                     display: 'flex',
@@ -92,19 +96,19 @@ export default function RoadmapView({ onOpenProject }) {
                   }}
                   onClick={() => onOpenProject(p.id)}
                   onMouseEnter={(e) => { e.currentTarget.style.borderColor = borderAccent; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}
                 >
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                       <span className="project-number">#{String(p.id).padStart(2, '0')}</span>
-                      <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: '700' }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--tier-beginner)', fontWeight: '700' }}>
                         ✓ {p.checklist_completed}/8
                       </span>
                     </div>
-                    <div style={{ fontWeight: '700', fontSize: '0.95rem', color: '#fff', marginBottom: '0.25rem' }}>
+                    <div style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
                       {p.name}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                       {p.category}
                     </div>
                   </div>
@@ -119,7 +123,7 @@ export default function RoadmapView({ onOpenProject }) {
                           flex: 1,
                           height: '5px',
                           borderRadius: '2px',
-                          background: chkVal ? borderAccent : 'rgba(255,255,255,0.1)',
+                          background: chkVal ? borderAccent : 'var(--border)',
                         }}
                       />
                     ))}

@@ -85,7 +85,7 @@ export default function AuthModal({ user, onClose, onAuthSuccess, onLogout }) {
         </div>
 
         {error && (
-          <div style={{ padding: '0.75rem', background: 'rgba(244, 63, 94, 0.15)', border: '1px solid rgba(244, 63, 94, 0.3)', borderRadius: '6px', color: '#fca5a5', marginBottom: '1rem', fontSize: '0.85rem' }}>
+          <div style={{ padding: '0.75rem', background: 'rgba(167, 139, 250, 0.12)', border: '1px solid var(--tier-advanced)', borderRadius: '6px', color: 'var(--tier-advanced)', marginBottom: '1rem', fontSize: '0.85rem' }}>
             {error}
           </div>
         )}
@@ -93,7 +93,7 @@ export default function AuthModal({ user, onClose, onAuthSuccess, onLogout }) {
         {/* Guest Mode: Login or Register */}
         {!user && (
           <div>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem' }}>
               <button
                 className={`btn btn-sm ${tab === 'login' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => setTab('login')}
@@ -186,10 +186,10 @@ export default function AuthModal({ user, onClose, onAuthSuccess, onLogout }) {
         {/* Authenticated Mode: Profile & Preferences & Privacy Controls */}
         {user && (
           <div>
-            <div style={{ marginBottom: '1.5rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1rem', borderRadius: '8px' }}>
-              <div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#fff' }}>{user.full_name || user.username}</div>
+            <div style={{ marginBottom: '1.5rem', background: 'var(--bg-page)', border: '1px solid var(--border)', padding: '1rem', borderRadius: '8px' }}>
+              <div style={{ fontWeight: '700', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{user.full_name || user.username}</div>
               <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>@{user.username} • {user.email}</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--cyan)', marginTop: '0.25rem' }}>Role: {user.role.toUpperCase()}</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--accent)', marginTop: '0.25rem' }}>Role: {user.role.toUpperCase()}</div>
             </div>
 
             <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>AI Provider Configuration</h3>
@@ -236,10 +236,10 @@ export default function AuthModal({ user, onClose, onAuthSuccess, onLogout }) {
               Save Preferences
             </button>
 
-            {/* Privacy Controls & Account Deletion (Section 6 requirement) */}
-            <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem' }}>
-              <h4 style={{ fontSize: '0.9rem', color: '#fca5a5', marginBottom: '0.5rem' }}>Privacy Controls & Data Sovereignty</h4>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginBottom: '1rem' }}>
+            {/* Privacy Controls & Account Deletion */}
+            <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.25rem' }}>
+              <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Privacy Controls & Data Sovereignty</h4>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
                 You have full control over your stored project execution history, saved outputs, and credentials.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -247,8 +247,7 @@ export default function AuthModal({ user, onClose, onAuthSuccess, onLogout }) {
                   Sign Out
                 </button>
                 <button
-                  className="btn btn-sm"
-                  style={{ background: 'rgba(244, 63, 94, 0.2)', color: '#fca5a5', border: '1px solid rgba(244, 63, 94, 0.4)' }}
+                  className="btn btn-secondary btn-sm"
                   onClick={handleDeleteAccount}
                 >
                   Delete Account & Data

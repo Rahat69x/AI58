@@ -106,8 +106,8 @@ export default function App() {
         {loading ? (
           <div style={{ textAlign: 'center', padding: '5rem', color: 'var(--text-muted)' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem', animation: 'spin 1.5s linear infinite' }}>🌐</div>
-            <h2 style={{ fontSize: '1.25rem', color: '#fff' }}>Initializing AI58 Platform Core...</h2>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-dim)', marginTop: '0.5rem' }}>
+            <h2 style={{ fontSize: '1.25rem', color: 'var(--text-primary)' }}>Initializing AI58 Platform Core...</h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
               Connecting to 58 AI project runners and shared services...
             </p>
           </div>

@@ -49,7 +49,7 @@ export default function DashboardView({
         <div className="stat-box" onClick={() => setCurrentTier('ALL')} style={{ cursor: 'pointer' }}>
           <div>
             <div className="stat-label">Total Projects</div>
-            <div className="stat-value gradient-text">{stats?.total_projects || 58}</div>
+            <div className="stat-value stat-total">{stats?.total_projects || 58}</div>
           </div>
           <div className="stat-icon">🚀</div>
         </div>
@@ -57,7 +57,7 @@ export default function DashboardView({
         <div className="stat-box" onClick={() => setCurrentTier('BEGINNER')} style={{ cursor: 'pointer' }}>
           <div>
             <div className="stat-label">Beginner Tier</div>
-            <div className="stat-value" style={{ color: '#34d399' }}>{stats?.beginner_count || 19}</div>
+            <div className="stat-value stat-beginner">{stats?.beginner_count || 19}</div>
           </div>
           <div className="stat-icon">🌱</div>
         </div>
@@ -65,7 +65,7 @@ export default function DashboardView({
         <div className="stat-box" onClick={() => setCurrentTier('INTERMEDIATE')} style={{ cursor: 'pointer' }}>
           <div>
             <div className="stat-label">Intermediate Tier</div>
-            <div className="stat-value" style={{ color: '#38bdf8' }}>{stats?.intermediate_count || 20}</div>
+            <div className="stat-value stat-intermediate">{stats?.intermediate_count || 20}</div>
           </div>
           <div className="stat-icon">⚡</div>
         </div>
@@ -73,13 +73,13 @@ export default function DashboardView({
         <div className="stat-box" onClick={() => setCurrentTier('ADVANCED')} style={{ cursor: 'pointer' }}>
           <div>
             <div className="stat-label">Advanced Tier</div>
-            <div className="stat-value" style={{ color: '#c084fc' }}>{stats?.advanced_count || 19}</div>
+            <div className="stat-value stat-advanced">{stats?.advanced_count || 19}</div>
           </div>
           <div className="stat-icon">🌌</div>
         </div>
       </section>
 
-      {/* Filter and Search Bar */}
+      {/* Filter and Search Bar: --bg-surface / --border, no tier color */}
       <div className="filter-bar">
         <div className="search-input-wrapper">
           <span className="search-icon-inside">🔍</span>
@@ -92,33 +92,34 @@ export default function DashboardView({
           />
         </div>
 
+        {/* Filter tabs: active tab uses matching tier color, inactive stays --text-muted */}
         <div className="filter-pills">
           <button
-            className={`pill-btn ${currentTier === 'ALL' && !favoritesOnly ? 'active' : ''}`}
+            className={`pill-btn ${currentTier === 'ALL' && !favoritesOnly ? 'active active-all' : ''}`}
             onClick={() => { setCurrentTier('ALL'); setFavoritesOnly(false); }}
           >
             All (58)
           </button>
           <button
-            className={`pill-btn ${currentTier === 'BEGINNER' && !favoritesOnly ? 'active' : ''}`}
+            className={`pill-btn ${currentTier === 'BEGINNER' && !favoritesOnly ? 'active active-beginner' : ''}`}
             onClick={() => { setCurrentTier('BEGINNER'); setFavoritesOnly(false); }}
           >
             Beginner (19)
           </button>
           <button
-            className={`pill-btn ${currentTier === 'INTERMEDIATE' && !favoritesOnly ? 'active' : ''}`}
+            className={`pill-btn ${currentTier === 'INTERMEDIATE' && !favoritesOnly ? 'active active-intermediate' : ''}`}
             onClick={() => { setCurrentTier('INTERMEDIATE'); setFavoritesOnly(false); }}
           >
             Intermediate (20)
           </button>
           <button
-            className={`pill-btn ${currentTier === 'ADVANCED' && !favoritesOnly ? 'active' : ''}`}
+            className={`pill-btn ${currentTier === 'ADVANCED' && !favoritesOnly ? 'active active-advanced' : ''}`}
             onClick={() => { setCurrentTier('ADVANCED'); setFavoritesOnly(false); }}
           >
             Advanced (19)
           </button>
           <button
-            className={`pill-btn ${favoritesOnly ? 'active' : ''}`}
+            className={`pill-btn ${favoritesOnly ? 'active active-favorites' : ''}`}
             onClick={() => setFavoritesOnly(!favoritesOnly)}
           >
             ★ Favorites
@@ -126,10 +127,9 @@ export default function DashboardView({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <label style={{ fontSize: '0.8rem', color: 'var(--text-dim)', fontWeight: '600' }}>Category:</label>
+          <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600' }}>Category:</label>
           <select
-            className="form-input"
-            style={{ width: 'auto', padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+            className="category-select"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -140,16 +140,16 @@ export default function DashboardView({
         </div>
       </div>
 
-      {/* Active & Recent Projects Bar */}
+      {/* Active / Recently Run Pills → --accent */}
       {stats?.active_projects && stats.active_projects.length > 0 && (
-        <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--text-dim)', textTransform: 'uppercase' }}>
+        <div className="active-recent-bar">
+          <span className="active-recent-label">
             ⚡ Active / Recently Run:
           </span>
           {stats.active_projects.map(p => (
             <button
               key={p.id}
-              className="btn btn-secondary btn-sm"
+              className="recent-pill"
               onClick={() => onOpenProject(p.id)}
             >
               #{String(p.id).padStart(2, '0')} {p.name}
@@ -163,7 +163,7 @@ export default function DashboardView({
         <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
           Showing <strong>{filteredProjects.length}</strong> of <strong>58</strong> projects
         </div>
-        <div style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>
+        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
           Click <strong>[OPEN]</strong> to view workbench or <strong>[RUN]</strong> for instant execution
         </div>
       </div>
@@ -191,14 +191,14 @@ export default function DashboardView({
                   <span className={`tier-badge ${tierClass}`}>{p.tier}</span>
                 </div>
 
-                <div style={{ fontSize: '0.75rem', color: 'var(--cyan)', fontWeight: '600', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600', marginBottom: '0.5rem' }}>
                   {p.category}
                 </div>
 
                 <p className="project-desc">{p.description}</p>
 
                 <div style={{ marginBottom: '0.75rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--text-dim)', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--text-muted)', marginBottom: '0.35rem', textTransform: 'uppercase' }}>
                     Core Capabilities:
                   </div>
                   <ul className="capabilities-list">
@@ -209,7 +209,7 @@ export default function DashboardView({
                       </li>
                     ))}
                     {p.capabilities.length > 3 && (
-                      <li className="capability-item" style={{ color: 'var(--text-dim)' }}>
+                      <li className="capability-item">
                         +{p.capabilities.length - 3} more capabilities
                       </li>
                     )}
@@ -229,7 +229,7 @@ export default function DashboardView({
                   onClick={() => onToggleFavorite(p.id)}
                   title={p.is_favorite ? 'Remove from favorites' : 'Add to favorites'}
                 >
-                  <span style={{ color: p.is_favorite ? '#f59e0b' : 'inherit' }}>
+                  <span style={{ color: p.is_favorite ? 'var(--accent)' : 'var(--text-muted)' }}>
                     {p.is_favorite ? '★' : '☆'}
                   </span>
                 </button>

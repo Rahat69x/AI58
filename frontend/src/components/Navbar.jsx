@@ -23,19 +23,19 @@ export default function Navbar({ activeView, setActiveView, currentTier, setCurr
             className={`nav-btn ${activeView === 'dashboard' && currentTier === 'BEGINNER' ? 'active' : ''}`}
             onClick={() => { setActiveView('dashboard'); setCurrentTier('BEGINNER'); }}
           >
-            <span className="tier-badge tier-beginner" style={{ padding: '0.1rem 0.4rem' }}>19</span> Beginner
+            <span className="nav-counter-badge tier-beginner">19</span> Beginner
           </button>
           <button
             className={`nav-btn ${activeView === 'dashboard' && currentTier === 'INTERMEDIATE' ? 'active' : ''}`}
             onClick={() => { setActiveView('dashboard'); setCurrentTier('INTERMEDIATE'); }}
           >
-            <span className="tier-badge tier-intermediate" style={{ padding: '0.1rem 0.4rem' }}>20</span> Intermediate
+            <span className="nav-counter-badge tier-intermediate">20</span> Intermediate
           </button>
           <button
             className={`nav-btn ${activeView === 'dashboard' && currentTier === 'ADVANCED' ? 'active' : ''}`}
             onClick={() => { setActiveView('dashboard'); setCurrentTier('ADVANCED'); }}
           >
-            <span className="tier-badge tier-advanced" style={{ padding: '0.1rem 0.4rem' }}>19</span> Advanced
+            <span className="nav-counter-badge tier-advanced">19</span> Advanced
           </button>
           <button
             className={`nav-btn ${activeView === 'roadmap' ? 'active' : ''}`}
