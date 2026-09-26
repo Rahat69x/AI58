@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  ai58:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai58-platform
+    ports:
+      - "8000:8000"
+    environment:
+      - PLATFORM_NAME=AI58
+      - ENVIRONMENT=production
+      - BACKEND_HOST=0.0.0.0
+      - BACKEND_PORT=8000
+      - DATABASE_URL=sqlite:////app/data/ai58.db
+      - SECRET_KEY=ai58-production-super-secret-key-change-me
+      - AI_PROVIDER=builtin
+    volumes:
+      - ai58-data:/app/data
+      - ai58-uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  ai58-data:
+  ai58-uploads:

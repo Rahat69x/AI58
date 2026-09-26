@@ -1,0 +1,16 @@
+[Unit]
+Description=AI58 Unified AI Project Platform
+After=network.target
+
+[Service]
+Type=simple
+User=ai58
+WorkingDirectory=/opt/ai58
+Environment="PATH=/opt/ai58/venv/bin"
+EnvironmentFile=/opt/ai58/.env
+ExecStart=/opt/ai58/venv/bin/python -m uvicorn backend.api.main:app --host 0.0.0.0 --port 8000 --workers 4
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

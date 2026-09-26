@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Build outputs
+dist/
+frontend/dist/
+build/
+*.egg-info/
+
+# Databases & local storage
+*.db
+*.sqlite
+*.sqlite3
+uploads/
+
+# Environment files with sensitive credentials
+.env
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
